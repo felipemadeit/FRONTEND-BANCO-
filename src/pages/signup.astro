@@ -1,0 +1,88 @@
+---
+
+const pageTitle = "Sign Up";
+
+---
+
+
+<link rel="stylesheet" href="./src/styles/global.css">
+<title>{pageTitle}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Acme&family=Concert+One&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Fjalla+One&family=Jaro:opsz@6..72&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+<div id="wrapper-content">
+
+    <!--left container -->
+    <div id="left-wrapper">
+        <!--Form container -->
+        <div id="wrapper-signup">
+            <div id="wrapper-title">
+                <h2>Create Your Account</h2>
+            </div>
+            <div id="wrapper-form-signup">
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="name">First name:</label>
+                        <input
+                            type="text"
+                            id="fist-name"
+                            name="first-name"
+                            required
+                            placeholder="Write your first name"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="text">Lastname</label>
+                        <input
+                            type="text"
+                            id="lastname"
+                            name="lastname"
+                            required
+                            placeholder="Write your lastname"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Phone:</label>
+                        <input
+                            type="number"
+                            id="number"
+                            name="number"
+                            required
+                            placeholder="Write your phone"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            placeholder="Enter your email"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            placeholder="Enter your password">
+                    </div>
+                    <div class="form-footer">
+                        <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="login-button">Log In</button>
+                    <div id="signup-link">
+                        Don't have an account? <a href="/login">Sign Up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--Right container -->
+    <div id="right-wrapper"></div>
+</div>

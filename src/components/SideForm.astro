@@ -1,0 +1,110 @@
+---
+
+
+---
+
+<link rel="stylesheet" href="./src/styles/global.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Acme&family=Concert+One&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Fjalla+One&family=Jaro:opsz@6..72&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+<div id="container-sidebar-form">
+
+    <div id="close-sidebar-form">
+        
+        <svg  id="button-close-sidebar"xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+
+    </div>
+    
+    <div id="upper-block-sidebar">
+
+        <h1>Enter your details and you are one step closer to making the most of your money</h1>
+
+        <div id="wrapper-form-sidebar">
+            <div class="card-register" id="first-card-register-form" data-id="1">
+                <form id="complete-register-form">
+                    <div class="block-sidebar-form">
+                        <label for="email">Email</label>
+                        <input style="background-color: gray;"  id="readonly-email" type="email" value="" readonly/>
+                        <label for="email">Confirm your email</label>
+                        <input type="email" id="confirm-email" name="email" required />
+                    </div>
+                </form>
+                <span  id="error-space"></span>
+            </div>
+
+
+            <div class="card-register" id="second-card-register-form" style="display: none" data-id="2">
+                <form id="complete-register-form">
+                    <div class="block-sidebar-form">
+                        <label for="names">Names</label>
+                        <input id="input-names" type="text"/>
+                        <label for="first-lastname">Write your first lastname</label>
+                        <input type="text" id="first-lastname" name="first-lastname" required />
+                        <label for="second-lastname">Write your second lastname</label>
+                        <input type="text" id="second-lastname" name="second-lastname" required />
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="card-register" id="third-card-register-form" style="display: none" data-id="3">
+                <form id="complete-register-form">
+                    <div class="block-sidebar-form">
+                        <label for="id-type">Select your ID type</label>
+                        <select id="id-type" name="id-type" required>
+                            <option value="">Select an option</option>
+                            <option value="national">National ID</option>
+                            <option value="foreign">Foreign ID</option>
+                        </select>
+                    </div>
+
+                    <div class="block-sidebar-form">
+                        <label for="id">Write your id number</label>
+                        <input type="number" id="id" name="id" required />
+                    </div>
+    
+                </form>
+            </div>
+
+
+            <div class="card-register" id="fourth-card-register-form" style="display: none" data-id="4">
+                <form id="complete-register-form">
+                    <div class="block-sidebar-form">
+                        <label for="phone">Write your phone number</label>
+                        <input type="number" id="number" name="number" required />
+                    </div>      
+                </form>
+            </div>
+
+
+            <div id="succesfully-card">
+                
+            </div>
+
+            
+        </div>
+
+       
+    </div>
+
+    <div id="wrapper-button-submit-sidebar">
+
+        <button id="submit-form-register-button">
+
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="../scripts/sideBar.js" />
+
+
+
+

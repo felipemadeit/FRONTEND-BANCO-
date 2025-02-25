@@ -1,0 +1,42 @@
+ <div id="wrapper-form-sidebar">
+
+            <form id="complete-register-form">
+                <div class="block-sidebar-form">
+                    <label for="email">Email</label>
+                    <input style="background-color: gray;"  id="readonly-email" type="email" value="" readonly/>
+                    <label for="email">Confirm your email</label>
+                    <input type="email" id="confirm-email" name="email" required />
+                </div>
+
+                <div class="block-sidebar-form">
+                    <label for="name">Enter your names as they appear on your ID</label>
+                    <input type="text" id="names" name="names" required />
+                    <label for="surnames">Enter your surnames as they appear on your ID</label>
+                    <input type="text" id="surnames" name="surnames" required />
+
+                </div>
+
+                <div class="block-sidebar-form">
+                    <label for="id-type">Select your ID type</label>
+                    <select id="id-type" name="id-type" required>
+                        <option value="">Select an option</option>
+                        <option value="national">National ID</option>
+                        <option value="foreign">Foreign ID</option>
+                    </select>
+
+                    
+                </div>
+
+                <div class="block-sidebar-form">
+                    <label for="id">Write your id number</label>
+                    <input type="number" id="id" name="id" required />
+                </div>
+
+                <div class="block-sidebar-form">
+                    <label for="phone">Type your number</label>
+                    <input type="number" id="phone" name="phone" required/>
+                </div>
+
+
+            </form>
+        </div>
