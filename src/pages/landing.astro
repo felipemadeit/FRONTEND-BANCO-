@@ -1,6 +1,17 @@
 ---
 import CreditCard from "../components/CreditCard.astro";
 import SideForm from "../components/SideForm.astro";
+import Alert from "../components/alert/Alert.astro";
+import validateForm from "../scripts/landingUtils";
+
+const succesfullyForm = validateForm();
+
+if (succesfullyForm) {
+    console.log("SI");
+} else {
+    console.log("NO");
+}
+
 
 const pageTitle = "Home";
 
@@ -58,9 +69,8 @@ const pageTitle = "Home";
     </div>
 </div>
 
+<Alert successfully={false}, message="Bad request", display={false} />
 
 <SideForm />
 
 
-
-<script src="../scripts/landingUtils.js" />

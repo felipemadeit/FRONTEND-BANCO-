@@ -1,0 +1,71 @@
+* {
+    font-family: "Fjalla One", serif;
+}
+
+#container-alert {
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba( 255, 255, 255, 0.1 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 5.5px );
+    -webkit-backdrop-filter: blur( 5.5px );
+    border-radius: 10px;
+}
+
+#wrapper-alert {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    height: 45%;
+    background-color: #D5FB06;
+    border-radius: 30px;
+    box-sizing: padding-box;
+    padding: 20px 40px;
+}
+
+#container-img-alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40%;
+}
+
+#container-alert-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 40%;
+    font-size: 30px;
+}
+
+#container-button-ok {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 20%;
+}
+
+#container-button-ok button {
+    width: 130px;
+    box-sizing: border-box;
+    padding:10px 5px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}

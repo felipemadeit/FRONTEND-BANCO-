@@ -1,14 +1,8 @@
 import sendVerificationInfo from "../services/sendVerificationInfo";
 import { validateEmail } from "./landingUtils";
 
-/**
- * Controls the sidebar functionality including opening, closing and form validation
- * @returns {Object} Object containing the public methods for sidebar control
- */
-
 // Get DOM elements
 const sideBar = document.getElementById("container-sidebar-form");
-
 const buttonCloseSideBar = document.getElementById("button-close-sidebar");
 
 /**
@@ -16,24 +10,18 @@ const buttonCloseSideBar = document.getElementById("button-close-sidebar");
  * @returns {void}
  */
 export function launchSideBar() {
-
   const inputReadOnlyEmail = document.getElementById("readonly-email");
 
   try {
     const firstEmail = validateEmail();
 
     if (firstEmail) {
-
       sideBar.classList.add("active");
       inputReadOnlyEmail.value = firstEmail;
-
     } else {
-
       return false;
-      //console.error("Email validation failed");
     }
   } catch (error) {
-
     console.error("Error launching sidebar:", error);
   }
 }
@@ -43,39 +31,27 @@ export function launchSideBar() {
  * @returns {void}
  */
 export function closeSideBar() {
-
   if (!sideBar || !buttonCloseSideBar) {
-
     console.error("Required elements not found");
     return;
-
   }
 
   try {
     const handleClose = () => {
-
       if (sideBar.classList.contains("active")) {
-
         sideBar.classList.remove("active");
-
       }
     };
 
-    // Add click event listener
     buttonCloseSideBar.addEventListener("click", handleClose);
 
-    // Optional: Add escape key listener
     document.addEventListener("keydown", (event) => {
-
       if (event.key === "Escape") {
-
         handleClose();
       }
     });
   } catch (error) {
-
     console.error("Error closing sidebar:", error);
-
   }
 }
 
@@ -84,338 +60,193 @@ export function closeSideBar() {
  * @returns {void}
  */
 export function initializeSidebar() {
-
   if (!sideBar || !buttonCloseSideBar) {
-
     console.error("Cannot initialize sidebar: Required elements not found");
     return;
-
   }
 
-  // Set up initial state
   sideBar.classList.remove("active");
-
-  // Initialize close button
   closeSideBar();
 }
 
 /**
- * Validate the form data to register
- * @returns {boolean}
- *
+ * Validates the entire form and returns a boolean
+ * @returns {boolean} True if all form fields are valid
  */
+export function validateForm() {
+  try {
+    const email = validateEmails();
+    const names = validateNames();
+    const lastnames = validateLastNames();
+    const idNumber = validateIdNumber();
+    const phoneNumber = validateNumberPhone();
 
-document.addEventListener("DOMContentLoaded", function()  {
+    return !!(email && names && lastnames && idNumber && phoneNumber);
+  } catch (error) {
+    console.error("Error validating form:", error);
+    return false;
+  }
+}
 
-  //Data
-  let email = null;
-  let names = null;
-  let lastnames = null;
-  let idNumber = null;
-  let phoneNumber = null;
+/**
+ * Handles form submission and validation
+ * @returns {void}
+ */
+export function handleFormSubmission() {
+  const submitButton = document.getElementById("submit-form-register-button");
+  if (!submitButton) return;
 
-
-    document
-  .getElementById("submit-form-register-button")
-
-  .addEventListener("click", () => {
-
+  submitButton.addEventListener("click", () => {
     const card = document.querySelector(".card-register:not(.off)");
-    const cardId = card.dataset.id;
+    if (!card) return;
     
-    //console.log("DATA SET");
-    //console.log(cardId);
-
+    const cardId = card.dataset.id;
 
     switch (cardId) {
-
       case "1":
-
-        email = validateEmails();
-
-        if (email) {
-
-            moveRegisterCards(2);
-        };
-
+        if (validateEmails()) moveRegisterCards(2);
         break;
-
       case "2":
-
-        names = validateNames();
-        lastnames = validateLastNames();
-
-        if (names && lastnames) {
-
-            moveRegisterCards(3);
-        };
-
+        if (validateNames() && validateLastNames()) moveRegisterCards(3);
         break;
-
       case "3":
-
-          idNumber = validateIdNumber();
-          //console.log(idNumber);
-
-          if(idNumber) {
-            moveRegisterCards(4);
-          }
-
-          break;
-
+        if (validateIdNumber()) moveRegisterCards(4);
+        break;
       case "4":
-
-        phoneNumber = validateNumberPhone();
-
-        if (phoneNumber) {
+        if (validateNumberPhone()) {
           moveRegisterCards(5);
-        }
-
-        /*console.log(email);
-        console.log(number);
-        console.log(idNumber);
-        console.log(lastnames);
-        console.log(phoneNumber);*/
-
-        if (email && number && idNumber && lastnames && phoneNumber) {
-
-          sendVerificationInfo(email);
-          //redirectVerificationCode();
-
-        } else {
-
-          //console.log("faltan datos");
-          return false;
-
+          if (validateForm()) {
+            const email = document.getElementById("readonly-email").value;
+            sendVerificationInfo(email);
+          }
         }
         break;
     }
-
   });
-
-});
+}
 
 /**
- * This function validates the user email
- * 
- * @returns {email, boolean}
+ * Initialize form submission handler
+ * @returns {void}
  */
+export function initializeForm() {
+  document.addEventListener("DOMContentLoaded", function() {
+    handleFormSubmission();
+  });
+}
+
+// Helper functions (keep them private)
 
 function validateEmails() {
-
   const inputReadOnlyEmail = document.getElementById("readonly-email").value;
   const confirmEmailElement = document.getElementById("confirm-email"); 
   const inputSecondEmail = confirmEmailElement.value; 
 
   if (inputReadOnlyEmail === inputSecondEmail) {
-
-      return inputReadOnlyEmail;
-
+    return inputReadOnlyEmail;
   } else {
-
-      displayErrors("Emails do not match");
-      confirmEmailElement.value = ''; 
-
-      return false;
+    displayErrors("Emails do not match");
+    confirmEmailElement.value = ''; 
+    return false;
   }
 }
 
-/**
- * This function validates the names
- * 
- * @returns {boolean, error}
- */
-
-function validateNames () {
-
+function validateNames() {
   const names = document.getElementById("input-names").value;
 
   if (/\d/.test(names)) {
-
     displayErrors("Your name cannot contain numbers");
-
     return false;
-
   } else {
-      
     return names;
-
   }
+}
 
-};
-
-/**
- * This function validates the lastnames
- * 
- * @returns {boolean, error}
- */
-
-function validateLastNames () {
-
+function validateLastNames() {
   const firstLastname = document.getElementById("first-lastname").value;
   const secondLastName = document.getElementById("second-lastname").value;
-
   const fullLastname = firstLastname + secondLastName;
 
   const firstValidation = /\d/.test(firstLastname);
   const secondValidation = /\d/.test(secondLastName);
 
-  if ( firstValidation || secondValidation) {
-
+  if (firstValidation || secondValidation) {
     displayErrors("Your lastnames cannot contain numbers");
     return false;
-
   } else {
-
     return fullLastname;
-
   }
-
 }
 
-/**
- * This function move the cards with the inputs form
- * @param {} dataId 
- */
+function moveRegisterCards(dataId) {
+  const firstCard = document.getElementById("first-card-register-form");
+  const secondCard = document.getElementById("second-card-register-form");
+  const thirdCard = document.getElementById("third-card-register-form");
+  const fourthCard = document.getElementById("fourth-card-register-form");
 
-function moveRegisterCards (dataId) {
-
-    console.log(dataId);
-
-    const firstCard = document.getElementById("first-card-register-form");
-    const secondCard = document.getElementById("second-card-register-form");
-    const thirdCard = document.getElementById("third-card-register-form");
-    const fourthCard = document.getElementById("fourth-card-register-form");
-
-    switch (dataId) {
-
-        case 2:
-
-          firstCard.classList.toggle('off');
-
-          secondCard.style.display = 'flex';
-
-          break;
-        
-        case 3:
-
-          secondCard.classList.toggle('off');
-
-          secondCard.style.display = 'none';
-
-          thirdCard.style.display = 'flex';
-
-          break;
-        
-        case 4:
-
-          thirdCard.classList.toggle('off');
-
-          thirdCard.style.display = 'none';
-
-          fourthCard.style.display = 'flex';
-
-          break;
-
-        case 5: 
-
-          fourthCard.classList.toggle('off')
-
-          fourthCard.style.display = 'none';
-
-          break;
-
-          
-      };
-    
+  switch (dataId) {
+    case 2:
+      firstCard.classList.toggle('off');
+      secondCard.style.display = 'flex';
+      break;
+    case 3:
+      secondCard.classList.toggle('off');
+      secondCard.style.display = 'none';
+      thirdCard.style.display = 'flex';
+      break;
+    case 4:
+      thirdCard.classList.toggle('off');
+      thirdCard.style.display = 'none';
+      fourthCard.style.display = 'flex';
+      break;
+    case 5: 
+      fourthCard.classList.toggle('off')
+      fourthCard.style.display = 'none';
+      break;
+  }
 }
 
+function displayErrors(errorInformation) {
+  const spanError = document.getElementById("error-space");
 
-/**
- * This function catch the error and display it to the user
- * @param {string} errorInformation 
- */
+  spanError.classList.remove('shake');
+  void spanError.offsetWidth;
 
+  spanError.textContent = errorInformation;
+  spanError.classList.add('shake');
 
-function displayErrors (errorInformation) {
-
-    const spanError = document.getElementById("error-space");
-
+  setTimeout(() => {
+    spanError.textContent = '';
     spanError.classList.remove('shake');
-
-    void spanError.offsetWidth;
-
-    spanError.textContent = errorInformation;
-    spanError.classList.add('shake');
-
-    setTimeout(() => {
-        spanError.textContent = '';
-        spanError.classList.remove('shake');
-    }, 3000)
+  }, 3000)
 }
 
-
-/**
- * This function validates the identification number
- * 
- */
-
-function validateIdNumber () {
-
+function validateIdNumber() {
   const idNumber = document.getElementById("id").value;
-
   const numberValidation = /^[0-9]+$/.test(idNumber);
-
   const idLength = 10;
 
   if (numberValidation && idNumber.length === idLength) {
-
-    console.log("VERIFICAD0");
-
     return idNumber;
-    
-
   } else {
-
-    console.log("fallo la verificacion");
     displayErrors("Please verify your id number");
     return false;
-
   }
 }
 
-/**
- * This function validates the phone number
- */
-
-function validateNumberPhone () {
-
+function validateNumberPhone() {
   const phone = document.getElementById("number").value;
-
   const phoneValidation = /^[0-9]+$/.test(phone);
-
-  console.log("validando numero");
-
-  const numberLenght = phone.length
+  const numberLenght = phone.length;
 
   if (phoneValidation && numberLenght === 10) {
-
-      //console.log("NUMERO CORRECTO");
-
-      return phone;
-
+    return phone;
   } else {
-
-    //console.log("NUMERO INCORRECTO");
     displayErrors("Please verify your number");
     return false;
+  }
+}
 
-  };
-
-};
-
-function redirectVerificationCode () {
-
+function redirectVerificationCode() {
   window.location.href = '/email/verification';
-  
 }

@@ -3,8 +3,12 @@
  * 
  */
 
+import Alert from "@/components/alert/Alert.astro";
+
 async function sendVerificationInfo  (email)  {
 
+    const successfullyMessage = "Your verification code was send to " + email;
+    const badMessage = "Please check your info";
 
     console.log("ENVIANDO AL BACK");
     try {
@@ -19,18 +23,21 @@ async function sendVerificationInfo  (email)  {
             body: JSON.stringify({ email })
         });
 
-        console.log("SERVER REQUEST", response);
+        return  {
 
-        if (response.ok) {
+            success: response.ok,
+            message: response.ok ? successfullyMessage : badMessage
+        };
 
-            alert("Your verification code was send to " + email);
-        } else {
 
-            alert("Something went wrong, please try again");
-        }
     }  catch (error) {
 
         console.error(error);
+
+        return  {
+            success: false,
+            message: "Network error"
+        };
     }
 };
 

@@ -1,0 +1,70 @@
+---
+// Import the icons for display
+import { CircleCheckIcon } from "./icons/Done";
+import { BadgeAlertIcon } from "./icons/Bad";
+
+// Prop typing
+
+interface AlertProps {
+    successfully?: boolean;
+    message: string;
+    display?: boolean;
+}
+
+
+const { successfully= true, message, display = false } = Astro.props;
+---
+
+
+
+<link rel="stylesheet" href="./src/styles/alert.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Acme&family=Concert+One&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Fjalla+One&family=Jaro:opsz@6..72&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+{display && (
+
+<div id="container-alert">
+
+<div id="wrapper-alert">
+
+    <div id="container-img-alert">
+
+        {successfully ? (
+
+            <CircleCheckIcon size={110} color="white" />
+
+        ): (
+
+            <BadgeAlertIcon size={110} color="white"/>
+
+        )}
+
+    </div>
+    <div id="container-alert-message">
+
+        <p>{message}</p>
+
+    </div>
+
+    <div id="container-button-ok">
+        <button>Close</button>
+    </div>
+
+</div>
+
+</div>
+
+
+
+)}
+
